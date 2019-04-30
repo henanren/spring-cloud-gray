@@ -6,12 +6,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class GrayServerMarkerConfiguration {
 
+	@Bean
+	public GrayServerMarker grayServerMarkerBean() {
+		System.out.println(123);
+		return new GrayServerMarker();
+	}
 
-    @Bean
-    public GrayServerMarker grayServerMarkerBean() {
-        return new GrayServerMarker();
-    }
-
-    class GrayServerMarker {
-    }
+	class GrayServerMarker {
+	}
 }
