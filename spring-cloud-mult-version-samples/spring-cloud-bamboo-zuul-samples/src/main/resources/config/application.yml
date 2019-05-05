@@ -9,13 +9,26 @@ eureka:
       defaultZone: http://localhost:10001/eureka/
 
 ribbon:
-#    ReadTimeout: 30000
-#    ConnectTimeout: 30000
+    ReadTimeout: 60000
+    ConnectTimeout: 60000
     eureka:
         enabled: true
 zuul:
   prefix: /gateway #为zuul设置一个公共的前缀
-#  routes:
-#    eureka-client: #随便定义，当不存在serviceId时，默认该值为serviceId（就是注册服务的名称，属性spring.application.name）
-#      path: /client/** #匹配/techouse/usersystem/** 均路由到cloud-client
-#      serviceId: eureka-client #指定路由到的serviceId
+  routes:
+   api:
+       path: /api/**
+       serviceId: service-b
+  host:
+    socket-timeout-millis: 60000
+    connect-timeout-millis: 60000
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000

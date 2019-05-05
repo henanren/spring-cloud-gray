@@ -11,10 +11,18 @@ eureka:
       defaultZone: http://localhost:10001/eureka/
   instance:
     instanceId: ${spring.application.name}:${server.port}
+    metadata-map:
+     versions: 1,2
 
 feign:
   hystrix:
     enabled: true
+
+ribbon:
+    ReadTimeout: 60000
+    ConnectTimeout: 60000
+    eureka:
+        enabled: true
 
 hystrix:
   command:
@@ -23,4 +31,4 @@ hystrix:
         isolation:
           strategy: THREAD
           thread:
-            timeoutInMilliseconds: 5000
+            timeoutInMilliseconds: 60000
